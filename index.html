@@ -49,7 +49,7 @@
     "@type": "Person",
     "name": "Luca Codeluppi",
     "url": "https://lucacodeluppi06.github.io/",
-    "image": "https://lucacodeluppi06.github.io/assets/img/luca-ritratto-900.jpg",
+    "image": "https://lucacodeluppi06.github.io/assets/img/og-image.jpg",
     "jobTitle": "Ingegnere gestionale",
     "description": "Ingegnere gestionale specializzato in operations, analisi dei dati e growth marketing.",
     "address": {
@@ -142,18 +142,41 @@
             </ul>
           </div>
 
-          <figure class="portrait">
-            <div class="portrait-frame">
-              <picture>
-                <source type="image/webp"
-                        srcset="assets/img/luca-ritratto-480.webp 480w, assets/img/luca-ritratto-900.webp 900w"
-                        sizes="(min-width: 992px) 26rem, 90vw">
-                <img src="assets/img/luca-ritratto-900.jpg"
-                     srcset="assets/img/luca-ritratto-480.jpg 480w, assets/img/luca-ritratto-900.jpg 900w"
-                     sizes="(min-width: 992px) 26rem, 90vw"
-                     width="900" height="1125" fetchpriority="high"
-                     alt="Luca Codeluppi in camicia scura, sullo sfondo luci calde">
-              </picture>
+          <!-- Illustrazione in SVG e CSS: un grafico che cresce (nessuna foto) -->
+          <figure class="portrait hero-visual" role="img" aria-label="Illustrazione: un grafico in crescita tra processi, dati e risultati">
+            <div class="portrait-frame viz">
+              <ol class="viz-steps" aria-hidden="true">
+                <li><span>01</span> Processi</li>
+                <li><span>02</span> Dati</li>
+                <li><span>03</span> Crescita</li>
+              </ol>
+              <svg class="viz-chart" viewBox="0 0 400 500" aria-hidden="true" focusable="false">
+                <defs>
+                  <linearGradient id="viz-area" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="currentColor" stop-opacity=".32"/>
+                    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <g class="viz-grid">
+                    <line x1="0" y1="180" x2="400" y2="180"/>
+                    <line x1="0" y1="260" x2="400" y2="260"/>
+                    <line x1="0" y1="340" x2="400" y2="340"/>
+                    <line x1="0" y1="420" x2="400" y2="420"/>
+                  <line class="viz-base" x1="0" y1="480" x2="400" y2="480"/>
+                </g>
+                <g class="viz-bars">
+                    <rect x="11" y="446" width="26" height="34" rx="4"/>
+                    <rect x="79" y="437" width="26" height="43" rx="4"/>
+                    <rect x="147" y="421" width="26" height="59" rx="4"/>
+                    <rect x="215" y="400" width="26" height="80" rx="4"/>
+                    <rect x="283" y="360" width="26" height="120" rx="4"/>
+                    <rect x="349" y="314" width="26" height="166" rx="4"/>
+                </g>
+                <path class="viz-area" d="M24 418 C35.3 415.3 69.3 409.7 92 402 C114.7 394.3 137.3 383.3 160 372 C182.7 360.7 205.3 352.3 228 334 C250.7 315.7 273.7 288.0 296 262 C318.3 236.0 351.0 192.0 362 178 L362 500 L24 500 Z" fill="url(#viz-area)"/>
+                <path class="viz-line" d="M24 418 C35.3 415.3 69.3 409.7 92 402 C114.7 394.3 137.3 383.3 160 372 C182.7 360.7 205.3 352.3 228 334 C250.7 315.7 273.7 288.0 296 262 C318.3 236.0 351.0 192.0 362 178" pathLength="1"/>
+                <circle class="viz-halo" cx="362" cy="178" r="16"/>
+                <circle class="viz-dot" cx="362" cy="178" r="6"/>
+              </svg>
             </div>
             <figcaption class="float-card">
               <span class="float-value">+20%</span>
@@ -271,7 +294,7 @@
               la tecnologia e lo sport.
             </p>
             <div class="signature">
-              <img src="assets/img/luca-cv.webp" alt="" width="52" height="52" loading="lazy">
+              <span class="monogram monogram-sm" aria-hidden="true"><svg viewBox="0 0 64 64" aria-hidden="true"><path transform="translate(11.73 43.15) scale(0.01602 -0.01602)" d="M618 1262 573 1249Q545 1239 530 1221Q515 1203 515 1168V226Q515 180 538 159Q561 138 608 138H794Q842 138 877 152Q912 165 939 198Q967 231 990 287L1034 394Q1049 429 1070 441Q1092 452 1119 446Q1149 440 1162 415Q1175 391 1165 353L1091 58Q1078 9 1057 -13Q1036 -36 997 -36Q972 -36 949 -27Q927 -18 902 -9Q877 0 843 0H155Q117 0 98 17Q79 35 79 66Q79 116 131 138L176 151Q205 162 219 180Q234 198 234 232V1168Q234 1203 219 1221Q205 1239 176 1249L131 1262Q79 1284 79 1334Q79 1365 98 1383Q117 1400 155 1400H594Q632 1400 651 1383Q670 1365 670 1334Q670 1285 618 1262Z"/><path transform="translate(30.32 43.15) scale(0.01602 -0.01602)" d="M1291 353Q1285 289 1246 222Q1207 155 1138 98Q1069 41 970 5Q871 -30 744 -30Q538 -30 387 63Q236 157 153 321Q71 485 71 698Q71 854 121 987Q171 1119 260 1218Q350 1318 468 1372Q587 1427 724 1427Q822 1427 882 1409Q942 1391 977 1372Q1012 1354 1033 1354Q1052 1354 1063 1371Q1074 1388 1087 1405Q1100 1421 1124 1421Q1148 1421 1161 1407Q1174 1392 1185 1353L1284 1022Q1293 992 1278 969Q1262 946 1231 941Q1205 937 1182 949Q1160 961 1146 992Q1097 1107 1039 1173Q981 1240 912 1268Q842 1296 756 1296Q666 1296 593 1255Q520 1214 468 1139Q415 1064 386 962Q358 860 358 738Q358 556 419 426Q480 297 585 228Q690 160 824 160Q938 160 1030 210Q1121 261 1188 363Q1211 391 1229 399Q1246 408 1263 403Q1278 400 1285 386Q1292 373 1291 353Z"/></svg></span>
               <div>
                 <strong>Luca Codeluppi</strong>
                 <span>Ingegnere gestionale · Growth marketing</span>
