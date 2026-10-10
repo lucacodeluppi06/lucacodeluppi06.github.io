@@ -1,0 +1,25 @@
+@use "../abstracts" as *;
+
+// =============================================================
+// MONOGRAMMA "LC" — sostituisce la foto nel CV e nella firma
+// =============================================================
+
+.monogram {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+
+  svg { width: 100%; height: 100%; fill: currentColor; }
+}
+
+.monogram-sm { width: 3.25rem; }
+
+.monogram-lg {
+  width: clamp(6.5rem, 14vw, 8.5rem);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}

@@ -19,16 +19,6 @@
 
   @include mq(md) { grid-template-columns: auto 1fr auto; }
 
-  .cv-photo {
-    width: clamp(6.5rem, 14vw, 8.5rem);
-    height: auto;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid var(--surface);
-    box-shadow: var(--shadow);
-  }
-
   h1 { font-size: fluid(38, 60); margin-bottom: .4rem; }
 
   .cv-role {
