@@ -78,9 +78,8 @@ In alternativa si può usare l'estensione **Live Sass Compiler** di VS Code punt
 ## Modulo di contatto
 
 Il form usa [FormSubmit](https://formsubmit.co/), che inoltra i messaggi via email senza JavaScript e senza server.
-
-1. Alla prima compilazione del modulo dal sito online, FormSubmit invia una mail di attivazione: va confermata.
-2. Nella mail di conferma c'è un indirizzo alternativo (una stringa casuale). Va sostituito all'email nell'attributo `action` del form in `contatti.html`, così l'indirizzo non è più leggibile dai bot.
+Nell'attributo `action` del form c'è il codice casuale fornito da FormSubmit al posto dell'indirizzo email,
+così l'email non è leggibile dai bot. Dopo l'invio, il visitatore torna sulla pagina `grazie.html`.
 
 ## Pubblicazione
 
