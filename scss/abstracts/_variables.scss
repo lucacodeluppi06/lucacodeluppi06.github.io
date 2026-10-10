@@ -1,0 +1,64 @@
+// =============================================================
+// VARIABILI — design token del sito
+// Tutti i colori nascono da queste due mappe: il tema chiaro e il
+// tema scuro. Il mixin `theme-vars` le trasforma in CSS custom
+// properties (sia in esadecimale sia in terne RGB per Bootstrap).
+// =============================================================
+
+$themes: (
+  light: (
+    paper:        #F7F4EE,  // sfondo pagina, carta calda
+    surface:      #FFFFFF,  // card, form
+    surface-2:    #EFEBE3,  // sezioni alternate
+    ink:          #14171A,  // testo principale
+    ink-2:        #3A3F45,  // testo secondario
+    muted:        #5F656B,  // didascalie
+    line:         #E0DACF,  // bordi
+    accent:       #1D5C4B,  // verde "growth"
+    accent-strong:#154537,
+    accent-soft:  #E1EDE8,
+    on-accent:    #FFFFFF,
+  ),
+  dark: (
+    paper:        #0F1412,
+    surface:      #161C1A,
+    surface-2:    #1B2320,
+    ink:          #ECE9E2,
+    ink-2:        #C9C6BF,
+    muted:        #9AA19D,
+    line:         #29322F,
+    accent:       #7FD3B8,
+    accent-strong:#A5E3CF,
+    accent-soft:  #19302A,
+    on-accent:    #0F1412,
+  ),
+);
+
+// Breakpoint allineati a quelli di Bootstrap 5
+$breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);
+
+// Tipografia
+$font-sans:  "Geist", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+$font-serif: "Fraunces", Georgia, "Times New Roman", serif;
+$font-mono:  "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+// Forme e movimento
+$radius-sm: 10px;
+$radius:    16px;
+$radius-lg: 28px;
+$ease-out:  cubic-bezier(.22, 1, .36, 1);
+$header-h:  72px;
+
+// Categorie del portfolio: da questa lista Sass genera i filtri CSS
+$project-categories: (
+  marketing: "Marketing",
+  dati:      "Dati",
+  design:    "Design e UX",
+  sviluppo:  "Sviluppo",
+);

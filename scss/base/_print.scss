@@ -1,0 +1,90 @@
+// =============================================================
+// STAMPA — il CV si stampa (o si salva in PDF) pulito, su A4
+// =============================================================
+
+@page {
+  size: A4;
+  margin: 14mm 14mm 16mm;
+}
+
+@media print {
+  :root {
+    --paper: #fff;
+    --paper-rgb: 255, 255, 255;
+    --surface: #fff;
+    --surface-2: #F3F1EC;
+    --ink: #111;
+    --ink-2: #333;
+    --muted: #555;
+    --line: #DDD;
+    --accent: #1D5C4B;
+    --accent-soft: #E1EDE8;
+    color-scheme: light;
+  }
+
+  html { font-size: 12px; }
+
+  body { background: #fff !important; }
+
+  .print-only { display: inline-flex !important; }
+
+  .site-header,
+  .site-footer,
+  .skip-link,
+  .no-print,
+  .cv-actions {
+    display: none !important;
+  }
+
+  .page-hero { padding: 0 0 6mm; }
+
+  .cv-header {
+    grid-template-columns: auto 1fr !important;
+
+    .cv-photo { width: 26mm; box-shadow: none; border: 0; }
+  }
+
+  // In stampa il CV diventa a colonna singola; le card laterali
+  // finiscono in fondo, affiancate su tre colonne
+  .cv-layout {
+    display: block !important;
+    padding-bottom: 0;
+  }
+
+  .cv-aside {
+    position: static !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+    gap: 4mm;
+    margin-top: 7mm;
+
+    > :first-child { grid-row: span 2; }
+
+    .card { break-inside: avoid; }
+    .card-body { padding: 4mm 5mm; }
+  }
+
+  .cv-main > section + section { margin-top: 7mm; }
+
+  .cv-section-title {
+    font-size: 17pt;
+    margin-bottom: 4mm;
+    padding-bottom: 2mm;
+    break-after: avoid;
+  }
+
+  .timeline-item {
+    break-inside: avoid;
+    padding-bottom: 5mm;
+    grid-template-columns: 30mm 1fr !important;
+  }
+
+  .card {
+    box-shadow: none !important;
+  }
+
+  a { color: inherit !important; text-decoration: none !important; }
+
+  .reveal { animation: none !important; opacity: 1 !important; transform: none !important; }
+}

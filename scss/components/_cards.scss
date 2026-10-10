@@ -1,0 +1,88 @@
+@use "../abstracts" as *;
+
+// =============================================================
+// CARD — personalizzazione di .card di Bootstrap
+// =============================================================
+
+.card {
+  --bs-card-bg: var(--surface);
+  --bs-card-border-color: var(--line);
+  --bs-card-border-radius: var(--radius);
+  --bs-card-inner-border-radius: calc(var(--radius) - 1px);
+  --bs-card-spacer-x: clamp(1.25rem, 3vw, 2rem);
+  --bs-card-spacer-y: clamp(1.25rem, 3vw, 2rem);
+  --bs-card-color: var(--ink);
+  transition: border-color .3s ease, transform .4s $ease-out, box-shadow .4s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: rgba(var(--accent-rgb), .35);
+}
+
+// Numero grande (KPI)
+.kpi {
+  padding-block: 1.75rem;
+  border-top: 1px solid var(--line);
+
+  .kpi-value {
+    display: block;
+    font-family: var(--font-serif);
+    font-variation-settings: "SOFT" 50;
+    font-size: fluid(44, 64);
+    font-weight: 380;
+    line-height: 1;
+    letter-spacing: -.03em;
+    color: var(--ink);
+    margin-bottom: .9rem;
+
+    small {
+      font-size: .45em;
+      letter-spacing: 0;
+      color: var(--accent);
+      margin-left: .1em;
+    }
+  }
+
+  .kpi-label {
+    font-size: rem(15);
+    color: var(--ink-2);
+    margin: 0;
+    max-width: 18rem;
+  }
+}
+
+// Icona tonda dentro le card
+.icon-badge {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: var(--accent-soft);
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+
+  .icon { width: 1.4rem; height: 1.4rem; }
+}
+
+// Lista con spunte
+.check-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: .7rem;
+
+  li {
+    display: flex;
+    gap: .7rem;
+    align-items: flex-start;
+  }
+
+  .icon {
+    color: var(--accent);
+    margin-top: .3rem;
+  }
+}

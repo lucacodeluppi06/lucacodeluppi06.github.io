@@ -1,0 +1,553 @@
+/* =========================================================
+   DEPYL - Foglio di stile (layout pensato per desktop)
+   ========================================================= */
+
+/* ---------- Variabili: palette ispirata all'acqua ---------- */
+:root {
+  --navy: #03254C;
+  --blue: #0353A4;
+  --ocean: #0077B6;
+  --aqua: #00B4D8;
+  --sky: #90E0EF;
+  --foam: #E3F6FB;
+  --bg: #F4F9FC;
+  --white: #FFFFFF;
+  --text: #1B2B3A;
+  --muted: #5A6B7B;
+
+  --radius: 20px;
+  --shadow: 0 18px 40px rgba(3, 37, 76, 0.08);
+}
+
+/* ---------- Reset di base ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Plus Jakarta Sans", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  color: var(--navy);
+}
+
+h2 {
+  font-size: 40px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* ---------- Classi riutilizzabili ---------- */
+.container {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.section {
+  padding: 110px 0;
+}
+
+.section--white {
+  background-color: var(--white);
+}
+
+.section__head {
+  max-width: 720px;
+  margin-bottom: 56px;
+}
+
+.section__head p:last-child {
+  color: var(--muted);
+}
+
+/* Piccola etichetta sopra i titoli */
+.eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ocean);
+  margin-bottom: 14px;
+}
+
+.eyebrow--light {
+  color: var(--sky);
+}
+
+/* Bottoni */
+.btn {
+  display: inline-block;
+  padding: 15px 30px;
+  border: 2px solid var(--aqua);
+  border-radius: 999px;
+  background-color: var(--aqua);
+  color: var(--navy);
+  font-weight: 700;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn:hover {
+  background-color: var(--sky);
+  border-color: var(--sky);
+  transform: translateY(-2px);
+}
+
+.btn--ghost {
+  background-color: transparent;
+  border-color: rgba(255, 255, 255, 0.6);
+  color: var(--white);
+}
+
+.btn--ghost:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: var(--white);
+}
+
+.btn--small {
+  padding: 9px 22px;
+  font-size: 15px;
+}
+
+/* Card generica */
+.card {
+  background-color: var(--white);
+  border-radius: var(--radius);
+  padding: 40px;
+  box-shadow: var(--shadow);
+}
+
+.card--dark {
+  background: linear-gradient(135deg, var(--blue), var(--navy));
+  color: var(--white);
+}
+
+.card__label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ocean);
+  margin-bottom: 12px;
+}
+
+.card--dark .card__label {
+  color: var(--sky);
+}
+
+.card__big {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* =========================================================
+   HEADER + HERO
+   Sfondo: gradiente blu oceano + onde (assets/onde.svg)
+   ========================================================= */
+.hero {
+  position: relative;
+  color: var(--white);
+  padding-bottom: 200px;
+  background:
+    url("assets/onde.svg") bottom center / 100% 220px no-repeat,
+    radial-gradient(circle at 78% 38%, rgba(0, 180, 216, 0.35), transparent 45%),
+    linear-gradient(160deg, var(--navy) 0%, var(--blue) 65%, var(--ocean) 100%);
+}
+
+/* Barra di navigazione */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 28px;
+  padding-bottom: 28px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand__logo {
+  width: 42px;
+  height: 42px;
+}
+
+.brand__name {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--white);
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  font-weight: 600;
+}
+
+.navbar__links a:not(.btn) {
+  opacity: 0.85;
+  transition: opacity 0.2s, color 0.2s;
+}
+
+.navbar__links a:not(.btn):hover {
+  opacity: 1;
+  color: var(--sky);
+}
+
+/* Contenuto principale dell'hero */
+.hero__content {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr;
+  align-items: center;
+  gap: 40px;
+  padding-top: 70px;
+}
+
+.hero h1 {
+  font-size: 56px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 24px;
+}
+
+.hero h1 span {
+  color: var(--sky);
+}
+
+.hero__lead {
+  font-size: 19px;
+  max-width: 560px;
+  opacity: 0.9;
+  margin-bottom: 40px;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 16px;
+}
+
+/* Goccia grande con cerchi concentrici, come un'increspatura sull'acqua */
+.hero__visual {
+  position: relative;
+  width: 340px;
+  height: 340px;
+  margin-left: auto;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero__visual::before,
+.hero__visual::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.hero__visual::before {
+  inset: -40px;
+}
+
+.hero__visual::after {
+  inset: 50px;
+}
+
+.hero__visual img {
+  width: 170px;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+}
+
+/* =========================================================
+   PUNTI DI FORZA (si sovrappongono alle onde)
+   ========================================================= */
+.highlights {
+  position: relative;
+  z-index: 2;
+  margin-top: -120px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background-color: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 36px 0;
+}
+
+.highlight {
+  padding: 0 32px;
+  border-left: 1px solid #E2ECF2;
+}
+
+.highlight:first-child {
+  border-left: none;
+}
+
+.highlight__title {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+
+.highlight p:last-child {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+/* =========================================================
+   CHI SIAMO
+   ========================================================= */
+.about {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.about__story > p:last-child {
+  color: var(--muted);
+}
+
+.quote {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--blue);
+  border-left: 4px solid var(--aqua);
+  padding-left: 24px;
+  margin: 32px 0;
+}
+
+.about__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* =========================================================
+   COME FUNZIONA
+   ========================================================= */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.step {
+  padding: 36px;
+  border-radius: var(--radius);
+  background-color: var(--bg);
+}
+
+.step__number {
+  display: block;
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--aqua);
+  margin-bottom: 20px;
+}
+
+.step p {
+  color: var(--muted);
+}
+
+/* =========================================================
+   SOLUZIONI
+   ========================================================= */
+.solutions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+.solution {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-top: 6px solid var(--aqua);
+}
+
+.solution p {
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.tag {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ocean);
+  background-color: var(--foam);
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+}
+
+.link {
+  margin-top: auto;
+  font-weight: 700;
+  color: var(--ocean);
+}
+
+.link:hover {
+  color: var(--navy);
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-top: 32px;
+  padding: 32px 40px;
+  border-radius: var(--radius);
+  background-color: var(--foam);
+  border: 1px solid #C4E9F3;
+}
+
+.banner__label {
+  flex-shrink: 0;
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--navy);
+}
+
+.banner__text strong {
+  color: var(--blue);
+}
+
+/* =========================================================
+   CALL TO ACTION - CONTATTI
+   ========================================================= */
+.cta {
+  padding: 100px 0;
+  text-align: center;
+  color: var(--white);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(0, 180, 216, 0.35), transparent 60%),
+    linear-gradient(160deg, var(--blue), var(--navy));
+}
+
+.cta__inner {
+  max-width: 900px;
+}
+
+.cta h2 {
+  color: var(--white);
+}
+
+.cta p {
+  opacity: 0.88;
+  margin-bottom: 36px;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.footer {
+  background-color: #021B36;
+  color: rgba(255, 255, 255, 0.7);
+  padding-top: 64px;
+}
+
+.footer__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 48px;
+}
+
+.footer__tagline {
+  margin-top: 12px;
+}
+
+.social {
+  text-align: right;
+}
+
+.social__title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 14px;
+}
+
+.social__list {
+  display: flex;
+  gap: 12px;
+}
+
+.social__list a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.social__list a:hover {
+  background-color: var(--ocean);
+  border-color: var(--ocean);
+}
+
+.social__list img {
+  width: 20px;
+  height: 20px;
+}
+
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 24px;
+  padding-bottom: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 14px;
+}

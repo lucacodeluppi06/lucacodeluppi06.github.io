@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 220" preserveAspectRatio="none">
+  <!-- Tre onde sovrapposte: le prime due trasparenti, l'ultima dello stesso colore della pagina -->
+  <path d="M0 110C240 50 480 170 720 110S1200 50 1440 110V220H0Z" fill="#FFFFFF" fill-opacity="0.08"/>
+  <path d="M0 140C300 90 540 190 840 140S1260 100 1440 150V220H0Z" fill="#FFFFFF" fill-opacity="0.14"/>
+  <path d="M0 175C320 135 560 215 900 175S1300 145 1440 180V220H0Z" fill="#F4F9FC"/>
+</svg>

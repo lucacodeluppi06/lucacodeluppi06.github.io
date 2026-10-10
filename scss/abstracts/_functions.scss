@@ -1,0 +1,23 @@
+@use "sass:math";
+@use "sass:color";
+
+// Converte pixel in rem (base 16px)
+@function rem($px) {
+  @return math.div($px, 16) * 1rem;
+}
+
+// Tipografia fluida: cresce in modo lineare tra due larghezze di viewport
+// fluid(16, 20) => clamp(1rem, …vw + …rem, 1.25rem)
+@function fluid($min-px, $max-px, $min-vw: 360, $max-vw: 1320) {
+  $slope: math.div($max-px - $min-px, $max-vw - $min-vw);
+  $intercept: $min-px - $slope * $min-vw;
+  $vw: math.div(math.round($slope * 100 * 1000), 1000);
+  @return clamp(#{rem($min-px)}, #{$vw}vw + #{rem($intercept)}, #{rem($max-px)});
+}
+
+// Restituisce un colore come terna "r, g, b" (serve alle variabili -rgb di Bootstrap)
+@function rgb-triplet($c) {
+  @return math.round(color.channel($c, "red", $space: rgb)),
+    math.round(color.channel($c, "green", $space: rgb)),
+    math.round(color.channel($c, "blue", $space: rgb));
+}

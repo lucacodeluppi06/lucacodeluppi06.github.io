@@ -1,0 +1,5 @@
+// Punto d'ingresso degli strumenti Sass: variabili, funzioni, mixin.
+// Ogni partial li importa con: @use "../abstracts" as *;
+@forward "variables";
+@forward "functions";
+@forward "mixins";

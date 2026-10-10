@@ -1,0 +1,186 @@
+@use "../abstracts" as *;
+
+// =============================================================
+// CV — layout a due colonne con CSS Grid e sidebar sticky
+// =============================================================
+
+.page-hero {
+  padding-block: fluid(40, 80) fluid(32, 56);
+
+  h1 { margin-bottom: 1rem; }
+  .lead { max-width: 40rem; }
+}
+
+.cv-header {
+  display: grid;
+  gap: 1.5rem 2.5rem;
+  align-items: center;
+  grid-template-columns: 1fr;
+
+  @include mq(md) { grid-template-columns: auto 1fr auto; }
+
+  .cv-photo {
+    width: clamp(6.5rem, 14vw, 8.5rem);
+    height: auto;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--surface);
+    box-shadow: var(--shadow);
+  }
+
+  h1 { font-size: fluid(38, 60); margin-bottom: .4rem; }
+
+  .cv-role {
+    font-size: fluid(17, 20);
+    color: var(--ink-2);
+    margin-bottom: .75rem;
+  }
+
+  .cv-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem 1.25rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: rem(14.5);
+    color: var(--muted);
+
+    li { display: inline-flex; align-items: center; gap: .4rem; }
+  }
+
+  .cv-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+
+    @include mq(md) { flex-direction: column; align-items: stretch; }
+  }
+}
+
+.cv-layout {
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: 1fr;
+  padding-bottom: fluid(64, 112);
+
+  @include mq(lg) {
+    grid-template-columns: minmax(0, 1fr) 21rem;
+    gap: 4rem;
+    align-items: start;
+  }
+}
+
+.cv-main > section + section { margin-top: fluid(48, 72); }
+
+.cv-section-title {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  font-size: fluid(26, 34);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--line);
+
+  .num {
+    font-family: var(--font-mono);
+    font-size: rem(13);
+    color: var(--accent);
+    letter-spacing: .05em;
+  }
+}
+
+.cv-profile {
+  font-size: fluid(18, 20);
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+// Sidebar: sticky sotto l'header su desktop
+.cv-aside {
+  display: grid;
+  gap: 1.25rem;
+
+  @include mq(lg) {
+    position: sticky;
+    top: calc(var(--header-h) + 1.5rem);
+  }
+
+  .card-body { padding: 1.5rem; }
+
+  h2 {
+    font-family: var(--font-mono);
+    @include mono-label(11);
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  dl { margin: 0; }
+}
+
+// Livelli di lingua con barre (proprietà custom --lvl da 1 a 6)
+.lang-levels {
+  display: grid;
+  gap: .7rem;
+  margin: 0;
+
+  div {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: .35rem .75rem;
+    font-size: rem(14);
+  }
+
+  dt { font-weight: 500; color: var(--ink-2); }
+  dd { margin: 0; font-family: var(--font-mono); font-size: rem(12); color: var(--accent); }
+
+  // Barra del livello disegnata con un gradiente
+  div::after {
+    content: "";
+    grid-column: 1 / -1;
+    height: 4px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--accent) calc(var(--lvl) / 6 * 100%), var(--surface-2) 0);
+  }
+}
+
+.lang-native {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: .9rem;
+  margin-bottom: .9rem;
+  border-bottom: 1px dashed var(--line);
+  font-size: rem(14.5);
+
+  span { color: var(--muted); }
+}
+
+.cert-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+  font-size: rem(14.5);
+
+  strong { display: block; color: var(--ink); font-weight: 600; }
+  span { color: var(--muted); font-size: rem(13.5); }
+}
+
+.aside-note {
+  font-size: rem(15);
+  color: var(--ink-2);
+  margin-bottom: .75rem;
+}
+
+.skill-block + .skill-block { margin-top: 2rem; }
+
+.skill-block h3 {
+  font-family: var(--font-sans);
+  font-size: rem(16);
+  font-weight: 600;
+  letter-spacing: 0;
+  margin-bottom: .9rem;
+}

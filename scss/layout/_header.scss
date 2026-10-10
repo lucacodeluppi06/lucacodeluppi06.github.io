@@ -1,0 +1,213 @@
+@use "../abstracts" as *;
+
+// =============================================================
+// HEADER — menu sticky su tutte le dimensioni di schermo.
+// Su mobile l'hamburger funziona SENZA JavaScript: una checkbox
+// nascosta (#menu-toggle) apre e chiude il pannello.
+// =============================================================
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  background: rgba(var(--paper-rgb), .82);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  border-bottom: 1px solid transparent;
+  view-transition-name: site-header;
+
+  // Quando si scorre la pagina compare un filetto: scroll-driven
+  // animation, nessuno script che "ascolta" lo scroll.
+  @supports (animation-timeline: scroll()) {
+    animation: header-line linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 120px;
+  }
+
+  @supports not (animation-timeline: scroll()) {
+    border-bottom-color: var(--line);
+  }
+
+  .navbar {
+    min-height: var(--header-h);
+    padding-block: .75rem;
+    // .navbar azzera il padding di .container: lo ripristino per allineare il logo al contenuto
+    padding-inline: calc(var(--bs-gutter-x, 1.5rem) * .5);
+    flex-wrap: wrap;
+  }
+}
+
+@keyframes header-line {
+  to {
+    border-bottom-color: var(--line);
+    background: rgba(var(--paper-rgb), .9);
+  }
+}
+
+// Logo: monogramma + nome
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .7rem;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  margin-right: auto;
+
+  &:hover { color: var(--ink); }
+
+  .brand-mark {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 11px;
+    display: grid;
+    place-items: center;
+    background: var(--accent);
+    color: var(--on-accent);
+    transition: transform .4s $ease-out;
+
+    svg { width: 100%; height: 100%; fill: currentColor; }
+  }
+
+  &:hover .brand-mark { transform: rotate(-8deg) scale(1.05); }
+
+  .brand-name { font-size: rem(17); }
+
+  .brand-role {
+    display: block;
+    @include mono-label(10);
+    color: var(--muted);
+    margin-top: .1rem;
+  }
+}
+
+// Link di navigazione
+.site-header .nav-link {
+  --bs-nav-link-color: var(--ink-2);
+  --bs-nav-link-hover-color: var(--ink);
+  position: relative;
+  font-weight: 500;
+  padding: .5rem .9rem !important;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: .9rem;
+    right: .9rem;
+    bottom: .2rem;
+    height: 1.5px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .35s $ease-out;
+  }
+
+  &:hover::after,
+  &[aria-current="page"]::after { transform: scaleX(1); }
+
+  &[aria-current="page"] { color: var(--ink); }
+}
+
+// Checkbox che comanda il menu: invisibile ma raggiungibile da tastiera
+.menu-toggle {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+// Bottone hamburger (label della checkbox)
+.menu-button {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  display: grid;
+  place-content: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: background .2s;
+
+  span {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: transform .35s $ease-out, opacity .2s;
+  }
+
+  &:hover { background: var(--surface-2); }
+}
+
+.menu-toggle:focus-visible + .menu-button { @include focus-ring(2px); }
+
+// Hamburger che diventa una X
+.menu-toggle:checked + .menu-button {
+  span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  span:nth-child(2) { opacity: 0; }
+  span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+}
+
+// ----- Pannello del menu su mobile -----
+@include mq-down(lg) {
+  .site-header .navbar-collapse {
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    transition: grid-template-rows .45s $ease-out, visibility .45s;
+  }
+
+  .menu-inner {
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .menu-toggle:checked ~ .navbar-collapse {
+    grid-template-rows: 1fr;
+    visibility: visible;
+  }
+
+  .site-header .navbar-nav {
+    padding-top: 1.25rem;
+    gap: .25rem;
+  }
+
+  .site-header .nav-link {
+    font-family: var(--font-serif);
+    font-size: rem(30);
+    font-weight: 400;
+    letter-spacing: -.02em;
+    padding: .35rem 0 !important;
+
+    &::after { left: 0; right: auto; width: 2rem; bottom: .55rem; }
+  }
+
+  .menu-toggle:checked ~ .navbar-collapse .nav-item {
+    animation: fade-in .5s $ease-out both;
+
+    @for $i from 1 through 4 {
+      &:nth-child(#{$i}) { animation-delay: #{.05 + $i * .05}s; }
+    }
+  }
+
+  .nav-cta {
+    width: 100%;
+    margin: 1.25rem 0 1rem;
+    padding-block: .8rem;
+  }
+}
+
+@include mq(lg) {
+  .menu-inner {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .nav-cta { margin-left: .75rem; }
+}

@@ -1,0 +1,157 @@
+@use "../abstracts" as *;
+
+// =============================================================
+// FORM — stile dei campi Bootstrap + validazione solo CSS
+// :user-invalid mostra l'errore solo DOPO che l'utente ha
+// interagito con il campo (niente rosso appena si apre la pagina).
+// =============================================================
+
+.form-control,
+.form-select {
+  --bs-border-color: var(--line);
+  background-color: var(--surface);
+  color: var(--ink);
+  border-radius: 12px;
+  border-color: var(--line);
+  transition: border-color .2s ease, box-shadow .2s ease;
+
+  &::placeholder { color: var(--muted); opacity: .8; }
+
+  &:hover { border-color: rgba(var(--ink-rgb), .3); }
+
+  &:focus {
+    background-color: var(--surface);
+    color: var(--ink);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(var(--accent-rgb), .15);
+  }
+}
+
+textarea.form-control { min-height: 10rem; resize: vertical; }
+
+.form-floating {
+  > label { color: var(--muted); }
+
+  > .form-control:focus ~ label,
+  > .form-control:not(:placeholder-shown) ~ label,
+  > .form-select ~ label {
+    color: var(--ink-2);
+
+    &::after { background-color: var(--surface) !important; }
+  }
+
+  > textarea.form-control { height: 11rem; }
+}
+
+// Errori mostrati solo dopo l'interazione
+.form-control:user-invalid,
+.form-select:user-invalid {
+  border-color: #C2412D;
+  box-shadow: 0 0 0 4px rgba(194, 65, 45, .12);
+}
+
+.field-hint {
+  display: none;
+  font-size: rem(13.5);
+  color: #C2412D;
+  margin-top: .4rem;
+  padding-left: .25rem;
+}
+
+.form-floating:has(:user-invalid) + .field-hint,
+.consent:has(:user-invalid) .field-hint { display: block; }
+
+@media (prefers-color-scheme: dark) {
+  .form-control:user-invalid,
+  .form-select:user-invalid { border-color: #F08A75; }
+  .field-hint { color: #F08A75; }
+}
+
+// Checkbox
+.form-check-input {
+  background-color: var(--surface);
+  border-color: rgba(var(--ink-rgb), .35);
+
+  &:checked {
+    background-color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  &:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(var(--accent-rgb), .15);
+  }
+}
+
+// Scelta del tipo di richiesta: radio trasformati in "pillole"
+.choice-group {
+  border: 0;
+  padding: 0;
+  margin: 0;
+
+  legend {
+    font-size: rem(15);
+    font-weight: 550;
+    margin-bottom: .75rem;
+    float: none;
+  }
+}
+
+.choice-options {
+  display: grid;
+  gap: .6rem;
+  grid-template-columns: 1fr;
+
+  @include mq(sm) { grid-template-columns: repeat(3, 1fr); }
+}
+
+.choice {
+  position: relative;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    cursor: pointer;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: .15rem;
+    height: 100%;
+    padding: .85rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+    cursor: pointer;
+    transition: border-color .2s, background .2s, box-shadow .2s;
+    font-weight: 550;
+    font-size: rem(15);
+
+    small {
+      font-weight: 400;
+      color: var(--muted);
+      font-size: rem(13);
+    }
+  }
+
+  input:hover + label { border-color: rgba(var(--ink-rgb), .3); }
+
+  input:checked + label {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    box-shadow: inset 0 0 0 1px var(--accent);
+  }
+
+  input:focus-visible + label { @include focus-ring(2px); }
+}
+
+// Campo trappola per i bot (honeypot): invisibile alle persone
+.hp-field {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

@@ -1,0 +1,68 @@
+@use "../abstracts" as *;
+
+// =============================================================
+// BOTTONI — estendono .btn di Bootstrap con varianti personali
+// =============================================================
+
+.btn {
+  --bs-btn-font-weight: 550;
+  --bs-btn-padding-x: 1.35rem;
+  --bs-btn-padding-y: .72rem;
+  --bs-btn-border-radius: 999px;
+  --bs-btn-font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  transition: background-color .25s ease, color .25s ease, border-color .25s ease, transform .25s $ease-out;
+
+  .icon { transition: transform .3s $ease-out; }
+
+  &:hover .icon-arrow { transform: translateX(3px); }
+  &:hover .icon-arrow-up { transform: translate(2px, -2px); }
+  &:active { transform: translateY(1px); }
+
+  &:focus-visible {
+    box-shadow: none;
+    @include focus-ring(3px);
+  }
+}
+
+.btn-sm {
+  --bs-btn-padding-x: 1rem;
+  --bs-btn-padding-y: .45rem;
+  --bs-btn-font-size: .9375rem;
+}
+
+.btn-lg {
+  --bs-btn-padding-x: 1.75rem;
+  --bs-btn-padding-y: .95rem;
+  --bs-btn-font-size: 1.0625rem;
+}
+
+.btn-accent {
+  @include button-variant-vars(var(--accent), var(--on-accent), var(--accent-strong));
+}
+
+.btn-ink {
+  @include button-variant-vars(var(--ink), var(--paper), var(--ink-2));
+}
+
+.btn-ghost {
+  @include button-variant-vars(transparent, var(--ink), var(--surface), var(--line), var(--ink));
+  --bs-btn-hover-border-color: var(--ink);
+}
+
+// Link testuale con freccia
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-weight: 550;
+  color: var(--accent);
+  text-decoration: none;
+
+  .icon { transition: transform .3s $ease-out; }
+  &:hover { color: var(--accent-strong); }
+  &:hover .icon { transform: translateX(3px); }
+}

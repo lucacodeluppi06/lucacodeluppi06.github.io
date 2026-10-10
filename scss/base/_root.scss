@@ -1,0 +1,74 @@
+@use "sass:map";
+@use "../abstracts" as *;
+
+// =============================================================
+// ROOT — tema chiaro/scuro + collegamento a Bootstrap
+// Il tema scuro si attiva da solo se il sistema operativo
+// dell'utente è impostato in modalità scura.
+// =============================================================
+
+:root {
+  @include theme-vars(map.get($themes, light));
+  color-scheme: light;
+
+  --font-sans: #{$font-sans};
+  --font-serif: #{$font-serif};
+  --font-mono: #{$font-mono};
+  --radius-sm: #{$radius-sm};
+  --radius: #{$radius};
+  --radius-lg: #{$radius-lg};
+  --header-h: #{$header-h};
+  --shadow-sm: 0 1px 2px rgba(20, 23, 26, .05), 0 2px 8px rgba(20, 23, 26, .04);
+  --shadow: 0 2px 4px rgba(20, 23, 26, .04), 0 12px 32px -8px rgba(20, 23, 26, .12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include theme-vars(map.get($themes, dark));
+    color-scheme: dark;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, .3);
+    --shadow: 0 12px 32px -8px rgba(0, 0, 0, .55);
+  }
+}
+
+// Bootstrap 5.3 espone le sue impostazioni come variabili CSS:
+// qui le colleghiamo ai nostri token, così griglia, form, card e
+// bottoni di Bootstrap parlano automaticamente "la lingua" del sito.
+:root {
+  --bs-body-font-family: var(--font-sans);
+  --bs-body-font-size: 1.0625rem;
+  --bs-body-line-height: 1.65;
+  --bs-body-bg: var(--paper);
+  --bs-body-bg-rgb: var(--paper-rgb);
+  --bs-body-color: var(--ink);
+  --bs-body-color-rgb: var(--ink-rgb);
+  --bs-emphasis-color: var(--ink);
+  --bs-emphasis-color-rgb: var(--ink-rgb);
+  --bs-heading-color: var(--ink);
+  --bs-secondary-color: var(--muted);
+  --bs-secondary-bg: var(--surface-2);
+  --bs-tertiary-bg: var(--surface-2);
+  --bs-border-color: var(--line);
+  --bs-border-color-translucent: var(--line);
+  --bs-primary: var(--accent);
+  --bs-primary-rgb: var(--accent-rgb);
+  --bs-link-color: var(--accent);
+  --bs-link-color-rgb: var(--accent-rgb);
+  --bs-link-hover-color: var(--accent-strong);
+  --bs-link-hover-color-rgb: var(--accent-strong-rgb);
+  --bs-border-radius: var(--radius-sm);
+  --bs-border-radius-lg: var(--radius);
+  --bs-focus-ring-color: rgba(var(--accent-rgb), .3);
+  --bs-highlight-bg: var(--accent-soft);
+}
+
+// Transizioni fluide tra le pagine (View Transitions API, solo CSS)
+@view-transition {
+  navigation: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}

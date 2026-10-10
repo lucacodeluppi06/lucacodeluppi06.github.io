@@ -1,0 +1,157 @@
+@use "../abstracts" as *;
+
+// =============================================================
+// CONTATTI — grid a due colonne: testo + form
+// =============================================================
+
+.contact-grid {
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: 1fr;
+  padding-bottom: fluid(64, 112);
+
+  @include mq(lg) {
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+    gap: 5rem;
+    align-items: start;
+  }
+}
+
+.contact-intro {
+  @include mq(lg) {
+    position: sticky;
+    top: calc(var(--header-h) + 2rem);
+  }
+
+  h1 { margin-bottom: 1.25rem; }
+  .lead { margin-bottom: 2.5rem; }
+}
+
+.steps {
+  list-style: none;
+  counter-reset: step;
+  padding: 0;
+  margin: 0 0 2.5rem;
+  display: grid;
+  gap: 1.25rem;
+
+  li {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 1rem;
+    align-items: start;
+
+    &::before {
+      content: counter(step, decimal-leading-zero);
+      font-family: var(--font-mono);
+      font-size: rem(12);
+      color: var(--accent);
+      padding-top: .2rem;
+      border-top: 1px solid var(--accent);
+    }
+  }
+
+  strong { display: block; color: var(--ink); font-weight: 600; }
+  span { color: var(--ink-2); font-size: rem(15); }
+}
+
+.contact-alt {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+.form-card {
+  .card-body { padding: clamp(1.5rem, 4vw, 2.75rem); }
+
+  h2 {
+    font-size: fluid(26, 32);
+    margin-bottom: .4rem;
+  }
+
+  .form-note {
+    font-size: rem(14);
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+
+  .form-row-2 {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+
+    @include mq(sm) { grid-template-columns: 1fr 1fr; }
+  }
+
+  .consent {
+    font-size: rem(14);
+    color: var(--ink-2);
+
+    .form-check-input { margin-top: .2rem; }
+  }
+
+  .form-submit {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.75rem;
+
+    small { color: var(--muted); }
+  }
+}
+
+.required-mark {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+// =============================================================
+// PAGINE DI STATO — grazie.html e 404.html
+// =============================================================
+
+.status-page {
+  min-height: calc(100vh - var(--header-h) - 12rem);
+  min-height: calc(100svh - var(--header-h) - 12rem);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding-block: fluid(56, 96);
+
+  .status-code {
+    font-family: var(--font-serif);
+    font-size: clamp(6rem, 22vw, 13rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: .9;
+    letter-spacing: -.05em;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .status-icon {
+    width: 5rem;
+    height: 5rem;
+    margin: 0 auto 2rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--accent-soft);
+    color: var(--accent);
+
+    .icon { width: 2.25rem; height: 2.25rem; stroke-width: 2; }
+  }
+
+  h1 { font-size: fluid(34, 56); margin-bottom: 1rem; }
+
+  .lead { max-width: 34rem; margin: 0 auto 2.25rem; }
+
+  .status-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .75rem;
+  }
+}

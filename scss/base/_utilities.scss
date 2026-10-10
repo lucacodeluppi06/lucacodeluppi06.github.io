@@ -1,0 +1,109 @@
+@use "sass:math";
+@use "../abstracts" as *;
+
+// =============================================================
+// UTILITY E ANIMAZIONI
+// =============================================================
+
+// Link "salta al contenuto" per chi naviga da tastiera
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 2000;
+  padding: .7rem 1.1rem;
+  border-radius: var(--radius-sm);
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 600;
+  text-decoration: none;
+
+  &:focus { top: 1rem; color: var(--paper); }
+}
+
+:focus-visible { @include focus-ring; }
+
+// Sezioni
+.section {
+  padding-block: fluid(72, 128);
+  position: relative;
+}
+
+.section-alt {
+  background: var(--surface-2);
+}
+
+.section-head {
+  max-width: 46rem;
+  margin-bottom: fluid(36, 56);
+
+  p { color: var(--ink-2); margin-top: 1rem; }
+}
+
+// Pallino "disponibile" con pulsazione
+.status-dot {
+  position: relative;
+  width: .55rem;
+  height: .55rem;
+  border-radius: 50%;
+  background: #2EB67D;
+  flex: none;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: inherit;
+    animation: pulse 2.2s $ease-out infinite;
+  }
+}
+
+// Elementi che compaiono con lo scroll
+.reveal { @include reveal-on-scroll; }
+
+// Ritardi generati con un ciclo Sass
+@for $i from 1 through 4 {
+  .reveal-d#{$i} { animation-range: entry math.percentage($i * .04) cover math.percentage(.28 + $i * .04) !important; }
+}
+
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1); opacity: .6; }
+  80%, 100% { transform: scale(2.8); opacity: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+// Visibile solo in stampa (es. link ai contatti nel CV in PDF)
+.print-only { display: none !important; }
+
+// Le icone SVG in linea ereditano il colore del testo
+.icon {
+  width: 1.1em;
+  height: 1.1em;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vertical-align: -.15em;
+}
+
+.icon-fill { fill: currentColor; stroke: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

@@ -1,0 +1,199 @@
+@use "sass:map";
+@use "../abstracts" as *;
+
+// =============================================================
+// PROGETTI — griglia CSS Grid + filtri SOLO CSS
+// I radio button nascosti (#filtro-…) sono fratelli della griglia:
+// quando uno è selezionato, il selettore ~ nasconde le card delle
+// altre categorie. Le regole sono generate con un ciclo @each.
+// =============================================================
+
+.projects {
+  counter-reset: visibili;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-bottom: 1rem;
+
+  label {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .5rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink-2);
+    font-weight: 500;
+    font-size: rem(15);
+    cursor: pointer;
+    user-select: none;
+    transition: background .2s, color .2s, border-color .2s;
+
+    &:hover { border-color: var(--ink); color: var(--ink); }
+
+    .count {
+      font-family: var(--font-mono);
+      font-size: rem(11);
+      padding: .1rem .45rem;
+      border-radius: 999px;
+      background: var(--surface-2);
+      color: var(--muted);
+    }
+  }
+}
+
+// Riga "Stai vedendo N progetti": nel DOM sta DOPO la griglia
+// (così il contatore CSS ha già contato le card visibili),
+// ma con `order` la mostriamo SOPRA la griglia.
+.results-line {
+  order: -1;
+  margin: 0 0 1.75rem;
+  font-size: rem(14);
+  color: var(--muted);
+  font-family: var(--font-mono);
+
+  &::before { content: "Stai vedendo " counter(visibili) " progetti"; }
+}
+
+.filters { order: -2; }
+
+// Stato "Tutti" selezionato
+#filtro-tutti:checked ~ .filters label[for="filtro-tutti"],
+#filtro-tutti:focus-visible ~ .filters label[for="filtro-tutti"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+
+  .count { background: rgba(var(--paper-rgb), .15); color: var(--paper); }
+}
+
+#filtro-tutti:focus-visible ~ .filters label[for="filtro-tutti"] { @include focus-ring(2px); }
+
+// Una regola per ogni categoria, generata da Sass
+@each $slug, $label in $project-categories {
+  #filtro-#{$slug}:checked ~ .project-grid .project:not([data-cat~="#{$slug}"]) {
+    display: none;
+  }
+
+  #filtro-#{$slug}:checked ~ .filters label[for="filtro-#{$slug}"] {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+
+    .count { background: rgba(var(--paper-rgb), .15); color: var(--paper); }
+  }
+
+  #filtro-#{$slug}:focus-visible ~ .filters label[for="filtro-#{$slug}"] {
+    @include focus-ring(2px);
+  }
+}
+
+.project-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+
+  @include mq(md) { grid-template-columns: repeat(2, 1fr); }
+  @include mq(xl) { grid-template-columns: repeat(3, 1fr); }
+}
+
+.project {
+  counter-increment: visibili;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: fade-in .5s $ease-out both;
+
+  .project-cover {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--line);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform .7s $ease-out;
+    }
+
+    .tag {
+      position: absolute;
+      top: .9rem;
+      left: .9rem;
+      background: rgba(var(--surface-rgb), .92);
+      backdrop-filter: blur(6px);
+      color: var(--ink);
+    }
+  }
+
+  &:hover .project-cover img { transform: scale(1.04); }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+  }
+
+  .project-client {
+    @include mono-label(11);
+    color: var(--muted);
+    letter-spacing: .05em;
+  }
+
+  h3 {
+    font-size: fluid(21, 24);
+    margin: .2rem 0 .6rem;
+  }
+
+  p { color: var(--ink-2); font-size: rem(15.5); margin-bottom: 1.25rem; }
+
+  .chip-list { margin-bottom: 1.5rem; }
+  .chip { font-size: rem(12.5); padding: .25rem .65rem; }
+
+  .project-links {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+}
+
+// Progetto in evidenza: occupa due colonne su schermi grandi
+.project-featured {
+  @include mq(md) {
+    grid-column: 1 / -1;
+    flex-direction: row;
+
+    .project-cover {
+      flex: 0 0 55%;
+      aspect-ratio: auto;
+      min-height: 22rem;
+      border-bottom: 0;
+      border-right: 1px solid var(--line);
+    }
+
+    .card-body { justify-content: center; }
+  }
+
+  h3 { font-size: fluid(26, 34); }
+}
+
+// Nella card in evidenza mostro il lato sinistro dello screenshot (il titolo)
+.project-featured .project-cover img { object-position: left top; }

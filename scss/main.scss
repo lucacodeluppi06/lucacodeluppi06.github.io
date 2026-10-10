@@ -1,0 +1,41 @@
+// =============================================================
+//  Luca Codeluppi — sito personale
+//  Foglio di stile principale (Sass, sintassi SCSS)
+//
+//  Compilazione:  npm run build   →  css/style.css
+//  Sviluppo:      npm run watch
+//
+//  Architettura (ispirata al pattern 7-1):
+//  abstracts/  variabili, funzioni, mixin (non generano CSS)
+//  base/       font, tema, tipografia, utility, stampa
+//  layout/     header e footer
+//  components/ bottoni, card, chip, timeline, form, marquee
+//  pages/      stili specifici di ogni pagina
+// =============================================================
+
+// Base
+@use "base/fonts";
+@use "base/root";
+@use "base/typography";
+@use "base/utilities";
+
+// Layout
+@use "layout/header";
+@use "layout/footer";
+
+// Componenti
+@use "components/buttons";
+@use "components/chips";
+@use "components/cards";
+@use "components/timeline";
+@use "components/forms";
+@use "components/marquee";
+
+// Pagine
+@use "pages/home";
+@use "pages/cv";
+@use "pages/projects";
+@use "pages/contact";
+
+// Stampa (sempre per ultima)
+@use "base/print";

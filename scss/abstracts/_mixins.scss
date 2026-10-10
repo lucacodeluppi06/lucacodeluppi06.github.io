@@ -1,0 +1,67 @@
+@use "sass:map";
+@use "variables" as *;
+@use "functions" as *;
+
+// Media query mobile-first: @include mq(lg) { … }
+@mixin mq($bp) {
+  @media (min-width: map.get($breakpoints, $bp)) {
+    @content;
+  }
+}
+
+// Media query "fino a": @include mq-down(lg) { … }
+@mixin mq-down($bp) {
+  @media (max-width: map.get($breakpoints, $bp) - .02px) {
+    @content;
+  }
+}
+
+// Trasforma una mappa di colori in custom properties:
+// --accent: #1D5C4B; --accent-rgb: 29, 92, 75;
+@mixin theme-vars($theme) {
+  @each $name, $value in $theme {
+    --#{$name}: #{$value};
+    --#{$name}-rgb: #{rgb-triplet($value)};
+  }
+}
+
+// Anello di focus accessibile e coerente su tutto il sito
+@mixin focus-ring($offset: 3px) {
+  outline: 2px solid var(--accent);
+  outline-offset: $offset;
+}
+
+// Varianti dei bottoni Bootstrap tramite le sue variabili CSS
+@mixin button-variant-vars($bg, $color, $hover-bg, $border: $bg, $hover-color: $color) {
+  --bs-btn-bg: #{$bg};
+  --bs-btn-color: #{$color};
+  --bs-btn-border-color: #{$border};
+  --bs-btn-hover-bg: #{$hover-bg};
+  --bs-btn-hover-color: #{$hover-color};
+  --bs-btn-hover-border-color: #{$hover-bg};
+  --bs-btn-active-bg: #{$hover-bg};
+  --bs-btn-active-color: #{$hover-color};
+  --bs-btn-active-border-color: #{$hover-bg};
+  --bs-btn-focus-shadow-rgb: var(--accent-rgb);
+}
+
+// Etichetta piccola in monospace (eyebrow, date, tag)
+@mixin mono-label($size: 12) {
+  font-family: $font-mono;
+  font-size: rem($size);
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+// Animazione "rivela allo scroll" solo CSS, se il browser la supporta
+// e se l'utente non ha chiesto di ridurre il movimento
+@mixin reveal-on-scroll {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 28%;
+    }
+  }
+}
